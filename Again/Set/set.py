@@ -1,0 +1,2 @@
+numbers={1,2,3,2,3,3,4,1,5}
+print(numbers)
