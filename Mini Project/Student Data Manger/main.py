@@ -16,8 +16,18 @@ def view_student():
         print("Course: ",student.course)
 
 def search_student():
-     name=input("Enter the name: ")
+    name=input("Enter the name: ")
+    found = False
 
+    for student in students:
+        if name==student.name:   
+            found=True
+            print("Name:", student.name)
+            print("Age:", student.age)
+            print("Course:", student.course)
+    if not found:
+        print("Student Not Fount")      
+    
 def delete_student():
     print("this is for Delete")
 
