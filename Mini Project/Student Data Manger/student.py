@@ -4,6 +4,5 @@ class Student:
         self.age=age
         self.course=course
 
-    
-student1=Student(name,age,course)
+ 
  

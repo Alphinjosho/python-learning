@@ -1,14 +1,22 @@
-import student
+from student import Student
+
+students=[]
+
 def add_student():
     name=(input("Enter Student name: "))
     age=int(input("Enter Student age: "))
     course=(input("Enter Student course: "))
+    student = Student(name,age,course)
+    students.append(student)
 
 def view_student():
-    print("This is for view student")
+     for student in students:
+        print("Name: ",student.name)
+        print("Age: ",student.age)
+        print("Course: ",student.course)
 
 def search_student():
-    print("This is for search student")
+     name=input("Enter the name: ")
 
 def delete_student():
     print("this is for Delete")
