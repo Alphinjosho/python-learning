@@ -29,10 +29,29 @@ def search_student():
         print("Student Not Fount")      
     
 def delete_student():
-    print("this is for Delete")
+     name=input("Enter the name: ")
+     for student in students:
+         if name==student.name:
+             students.remove(student)
+             print("Student deleted successfully.")
+             break
+     else:
+        print("Student is not found")
+         
+def edit_student():
+      name=input("Enter the name: ")
+         for student in students:
+            if name==student.name:
+             new_age=input("Enter New age")
+             student.age=new_age
+             new_course=input("Enter New course")
+             student.course=new_course
+             print("Student Edit successfully.")
+             break
+        else:
+            print ("Student not found")
 
-def exit_program():
-    print("for Exit")
+
 
 print ("1:Add Student\n2:view Student \n3:Search Student \n4:Exit")
 try:
@@ -53,4 +72,4 @@ elif number==4:
    delete_student()
 
 elif number==5:
-   exit_program()
+   ed   it_student()

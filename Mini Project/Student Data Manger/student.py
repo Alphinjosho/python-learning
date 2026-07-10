@@ -4,5 +4,3 @@ class Student:
         self.age=age
         self.course=course
 
- 
- 
