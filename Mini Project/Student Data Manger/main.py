@@ -50,22 +50,15 @@ def edit_student():
              break
         else:
             print ("Student not found")
-
-import json
-
+ 
 def save_students():
-    data = []
-
+    data=[].append(student_data)
     for student in students:
-        data.append({
+        student_data={
             "name": student.name,
             "age": student.age,
-            "course": student.course
-        })
-
-    with open("students.json", "w") as file:
-        json.dump(data, file, indent=4)
-        
+            "course":student.course
+        }
 
 print ("1:Add Student\n2:view Student \n3:Search Student \n4:Exit")
 try:
