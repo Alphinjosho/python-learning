@@ -1,4 +1,5 @@
 from student import Student
+import json
 
 students=[]
 
@@ -8,6 +9,7 @@ def add_student():
     course=(input("Enter Student course: "))
     student = Student(name,age,course)
     students.append(student)
+    save_students()
 
 def view_student():
      for student in students:
@@ -37,30 +39,48 @@ def delete_student():
              break
      else:
         print("Student is not found")
-         
+     save_students()    
+
 def edit_student():
-      name=input("Enter the name: ")
-         for student in students:
+    name=input("Enter the name: ")
+    for student in students:
             if name==student.name:
-             new_age=input("Enter New age")
+             new_age=int (input("Enter New age"))
              student.age=new_age
              new_course=input("Enter New course")
              student.course=new_course
              print("Student Edit successfully.")
              break
-        else:
-            print ("Student not found")
+    else:
+         print ("Student not found")
+    save_students()
  
 def save_students():
-    data=[].append(student_data)
+    data=[]     
     for student in students:
         student_data={
             "name": student.name,
             "age": student.age,
             "course":student.course
-        }
+        } 
+        data.append(student_data)
 
-print ("1:Add Student\n2:view Student \n3:Search Student \n4:Exit")
+    with open ("students.json","w")as file:
+        json.dump(data,file)
+
+def load_students():
+    with open ("students.json","r")as file:
+        data = json.load(file)
+    for item in data:
+        student=Student(
+            item["name"],
+            item["age"],
+            item["course"]
+        )
+        students.append(student)
+
+load_students()
+print ("1:Add Student\n2:view Student\n3:Search Student\n4:Delete Student\n5:Edit student")
 try:
     number=int(input("Enter your Choice:"))
 except ValueError:
@@ -79,4 +99,4 @@ elif number==4:
    delete_student()
 
 elif number==5:
-   ed   it_student()
+   edit_student()
