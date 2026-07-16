@@ -1,6 +1,14 @@
 from fastapi import FastAPI 
+from pydantic import BaseModel
 
 app = FastAPI()
+
+class Student(BaseModel):
+    name:str
+    age:int
+    course:str
+    college:str
+
 
 @app.get("/")
 def home(): 
@@ -45,5 +53,10 @@ def project():
             }
     }
 @app.post("/student")
-def add_student():
-    return{"message":"I received your request."} 
+def add_student(new_student:Student):
+
+    return{ 
+         "name":new_student.name,
+         "age":new_student.age,
+         "course":new_student.course
+    } 
