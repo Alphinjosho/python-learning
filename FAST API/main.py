@@ -60,3 +60,28 @@ def add_student(new_student:Student):
          "age":new_student.age,
          "course":new_student.course
     } 
+
+@app.get("/student/{id}")
+def get_student(student_id:int):
+    return{
+        "student_id" : student_id
+    }
+@app.get("/student")
+def get_student(course:str):
+    return{
+        "course":course
+    }
+@app.put("/student/{id}")
+def update_student(student_id:int,new_student:Student):
+    return{
+        "student_id":student_id,
+        "name":new_student.name,
+        "age":new_student.age,
+        "course":new_student.course
+    }
+@app.delete("/student/{id}")
+def delete_student(student_id:int):
+    return{
+        "student_id":student_id,
+        "message": "successfuly deleted"
+    }
