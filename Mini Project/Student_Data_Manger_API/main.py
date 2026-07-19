@@ -1,1 +1,3 @@
-# mini project
+from fastapi import FastAPI
+
+fastapi = FastAPI()
