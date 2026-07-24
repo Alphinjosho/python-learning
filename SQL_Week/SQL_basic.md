@@ -99,12 +99,74 @@ PostgreSQL Server
 
 ✅ Created first table
 
-## Next Goals
+ # Week 4 - Day 3
+## SQL CRUD Operations
 
-- Insert records
-- Learn INSERT
-- Learn SELECT
-- Learn UPDATE
-- Learn DELETE
-- Connect FastAPI with PostgreSQL
-- Learn SQLAlchemy ORM
+**Date:** 24 July 2026
+
+---
+
+## Topics Learned
+
+### PostgreSQL Practice
+
+- Connected to PostgreSQL using pgAdmin
+- Worked with the `student_db` database
+- Used the `students` table
+
+### SQL Commands Practiced
+
+#### SELECT
+- Retrieved all records
+- Retrieved specific columns
+
+#### WHERE
+- Filtered records using conditions
+
+#### INSERT
+- Added new student records
+
+#### UPDATE
+- Updated existing student data
+
+#### DELETE
+- Deleted records from the table
+
+---
+
+## Concepts Understood
+
+- SQL CRUD Operations
+- Reading data using SELECT
+- Filtering data using WHERE
+- Updating records
+- Deleting records
+
+---
+
+## Practical Work
+
+- Created 4 student records
+- Practiced SQL queries in the Query Tool
+- Verified changes using SELECT
+
+---
+
+## Week 4 Progress
+
+- PostgreSQL Installation ✅
+- Database Creation ✅
+- Table Creation ✅
+- SQL CRUD Operations ✅
+
+Overall Progress: **75%**
+
+---
+
+## Next Goal (Day 4)
+
+- Learn SQLAlchemy
+- Understand ORM
+- Create database connection in Python
+- Create SQLAlchemy models
+- Connect Python to PostgreSQL
