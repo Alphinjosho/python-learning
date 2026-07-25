@@ -170,3 +170,140 @@ Overall Progress: **75%**
 - Create database connection in Python
 - Create SQLAlchemy models
 - Connect Python to PostgreSQL
+
+
+# Week 4 - Day 4
+## SQLAlchemy Fundamentals (Session 1)
+
+**Date:** 25 July 2026
+
+---
+
+# Goal
+
+Learn the core concepts of SQLAlchemy and understand how Python communicates with PostgreSQL.
+
+---
+
+# Topics Learned
+
+## 1. What is SQLAlchemy?
+
+- SQLAlchemy is a Python library.
+- It helps Python communicate with relational databases such as PostgreSQL.
+- It converts Python operations into SQL queries.
+
+---
+
+## 2. What is ORM?
+
+ORM = Object Relational Mapper
+
+ORM maps Python classes to database tables.
+
+### Mapping
+
+| PostgreSQL | Python |
+|------------|--------|
+| Table | Class |
+| Row | Object |
+| Column | Attribute |
+
+---
+
+## 3. Engine
+
+The Engine creates and manages the connection between Python and PostgreSQL.
+
+Database URL contains:
+
+- Database Type
+- Username
+- Password
+- Host (localhost)
+- Port (5432)
+- Database Name (student_db)
+
+---
+
+## 4. Session
+
+Session acts as a workspace for database operations.
+
+Changes are not permanently saved until:
+
+```python
+db.commit()
+```
+
+`commit()` saves changes to PostgreSQL.
+
+---
+
+## 5. Models
+
+A Model is a Python class that represents a database table.
+
+Example Concept:
+
+```
+students table
+      │
+      ▼
+class Student
+```
+
+---
+
+# Architecture
+
+```
+FastAPI
+    │
+    ▼
+SQLAlchemy
+    │
+    ▼
+PostgreSQL
+```
+
+---
+
+# Concepts Understood
+
+- SQLAlchemy
+- ORM
+- Engine
+- Database URL
+- Session
+- commit()
+- Models
+
+ 
+# Progress
+
+Week 4 Progress: **~82% Complete**
+
+Completed:
+
+- PostgreSQL Installation ✅
+- Database Creation ✅
+- Table Creation ✅
+- SQL CRUD Operations ✅
+- SQLAlchemy Concepts ✅
+
+Remaining:
+
+- SQLAlchemy Practical Coding
+- Connect Python to PostgreSQL
+- FastAPI + PostgreSQL
+- Alembic
+
+---
+
+# Next Goal
+
+- Create `database.py`
+- Create `models.py`
+- Connect SQLAlchemy to PostgreSQL
+- Create tables using SQLAlchemy
