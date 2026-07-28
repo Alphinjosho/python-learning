@@ -26,5 +26,37 @@ def create_student(student:schemas.StudentCreate):
     db.close()
     return student_db
 
-# @app.get("/students")
-# def get_student():
+@app.get("/students")
+def get_student():
+    db=SessionLocal()
+    students=db.query(models.Student).all()
+    db.close()
+    return students
+
+@app.get("/students/{id}")
+def get_student(id:int):
+        db=SessionLocal()
+        student=db.query(models.Student).filter(models.Student.id==id).first()
+        db.close()
+        return student
+
+@app.put("/students/{id}")
+def update_student(id:int,student:schemas.StudentCreate):
+    db=SessionLocal()
+    student_db=db.query(models.Student).filter(models.Student.id==id).first()
+    student_db.name = student.name
+    student_db.age = student.age
+    student_db.course = student.course
+    db.commit()
+    db.refresh(student_db)
+    db.close()
+    return student_db
+
+@app.delete("/students/{id}")
+def delete_student(id:int):
+    db=SessionLocal()
+    student_db=db.query(models.Student).filter(models.Student.id==id).first()
+    db.delete(student_db)
+    db.commit()
+    db.close()
+    return  {"message":"student deleted successfully"}
