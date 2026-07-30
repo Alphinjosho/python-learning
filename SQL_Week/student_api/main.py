@@ -60,3 +60,16 @@ def delete_student(id:int):
     db.commit()
     db.close()
     return  {"message":"student deleted successfully"}
+
+@app.post("/register")
+def register_user(user:schemas.UserCreate):
+   new_user=models.User(
+   username = user.username,
+   email = user.email,
+   hashed_password = hash_pass(user.password))
+   db.add(new_user)
+   db.commit()
+   db.close(new_user)
+   retun{"message": "user added"}
+   
+
