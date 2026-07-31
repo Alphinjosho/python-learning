@@ -1,9 +1,9 @@
-from fastapi import FastAPI
+from fastapi import FastAPI,Depends
 from database import engine,Base
 import models
 from database import SessionLocal
 import schemas
-
+ 
 Base.metadata.create_all(bind= engine)
 
 app = FastAPI()
@@ -62,14 +62,20 @@ def delete_student(id:int):
     return  {"message":"student deleted successfully"}
 
 @app.post("/register")
-def register_user(user:schemas.UserCreate):
+def register_user(
+    user:schemas.UserCreate,
+    db:Session=Depends(get_db)
+    ):
+
    new_user=models.User(
    username = user.username,
    email = user.email,
    hashed_password = hash_pass(user.password))
+
    db.add(new_user)
    db.commit()
-   db.close(new_user)
-   retun{"message": "user added"}
+   db.refresh(new_user)   
+
+   return{"message": "user added"}
    
 
