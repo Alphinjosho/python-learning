@@ -1,9 +1,11 @@
 from fastapi import FastAPI,Depends
-from database import engine,Base
+from database import engine,Base,get_db
 import models
 from database import SessionLocal
 import schemas
- 
+from sqlalchemy.orm import Session
+from utils import hash_pass
+
 Base.metadata.create_all(bind= engine)
 
 app = FastAPI()
@@ -66,16 +68,16 @@ def register_user(
     user:schemas.UserCreate,
     db:Session=Depends(get_db)
     ):
+    new_user=models.User(
+    username = user.username,
+    email = user.email,
+    hashed_password = hash_pass(user.password))
 
-   new_user=models.User(
-   username = user.username,
-   email = user.email,
-   hashed_password = hash_pass(user.password))
+    db.add(new_user)
+    db.commit()
+    db.refresh(new_user)   
 
-   db.add(new_user)
-   db.commit()
-   db.refresh(new_user)   
-
-   return{"message": "user added"}
+    return{"message": "user added"}
+  
    
 
