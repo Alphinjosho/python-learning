@@ -5,6 +5,7 @@ from database import SessionLocal
 import schemas
 from sqlalchemy.orm import Session
 from utils import hash_pass
+from auth import  create_access_token
 
 Base.metadata.create_all(bind= engine)
 
@@ -81,3 +82,21 @@ def register_user(
   
    
 
+@app.post("/login")
+def login_user(
+    login:schemas.LoginCreate,
+    db:Session = Depends(get_db)
+):
+    user = db.query(models.User).filter(models.User.email==login.email).first()
+    if user is None:
+        return {"message":"Invalid email or password"}
+    valid_password=verify_password(login.password, user.hashed_password)
+    if not valid_password :
+        return{"message":"Invalid email or password"} 
+    token = create_access_token(
+        data={"sub":user.email}
+    )
+    return{
+        "access_token":token,
+        "token_type":"bearer"
+    }
