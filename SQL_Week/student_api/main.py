@@ -5,7 +5,10 @@ from database import SessionLocal
 import schemas
 from sqlalchemy.orm import Session
 from utils import hash_pass
-from auth import  create_access_token
+from auth import  create_access_token,get_current_user
+from utils import verify_password
+from fastapi.security import OAuth2PasswordRequestForm
+
 
 Base.metadata.create_all(bind= engine)
 
@@ -84,13 +87,13 @@ def register_user(
 
 @app.post("/login")
 def login_user(
-    login:schemas.LoginCreate,
+    form_data: OAuth2PasswordRequestForm = Depends(),
     db:Session = Depends(get_db)
 ):
-    user = db.query(models.User).filter(models.User.email==login.email).first()
+    user = db.query(models.User).filter(models.User.email==form_data.username).first()
     if user is None:
         return {"message":"Invalid email or password"}
-    valid_password=verify_password(login.password, user.hashed_password)
+    valid_password=verify_password(form_data.password, user.hashed_password)
     if not valid_password :
         return{"message":"Invalid email or password"} 
     token = create_access_token(
@@ -100,3 +103,12 @@ def login_user(
         "access_token":token,
         "token_type":"bearer"
     }
+
+@app.get("/profile")
+def get_profile(
+    current_user = Depends(get_current_user)
+): 
+   return {
+       "message": "Welcome",
+       "user":current_user.email
+   }
