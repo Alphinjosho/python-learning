@@ -8,6 +8,7 @@ from utils import hash_pass
 from auth import  create_access_token,get_current_user
 from utils import verify_password
 from fastapi.security import OAuth2PasswordRequestForm
+from fastapi.middleware.cors import CORSMiddleware
 
 
 Base.metadata.create_all(bind= engine)
@@ -112,3 +113,12 @@ def get_profile(
        "message": "Welcome",
        "user":current_user.email
    }
+
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
